@@ -1,0 +1,56 @@
+1、tar（将多个文件合并为一个文件）
+创建tar文件：tar cvf archive_name.tar dirname/
+解压tar文件：tar xvf archive_name.tar
+查看tar文件：tar tvf archive_name.tar
+2、grep（在文件中查找字符串-不区分大小写）
+3、find（查找指定文件名的文件-不区分大小写）
+4、ssh（登录到远程主机）
+5、ls ls-lh ll
+6、pwd（输出当前工作目录）
+7、cd（可以在最近工作的两个目录间切换）
+8、gzip（创建一个*.gz的压缩文件）
+创建一个*.gz的压缩文件：gzip test.txt
+解压*.gz文件：gzip -d test.txt.gz
+显示压缩的比率：gzip -l *.gz
+9、bzip2
+创建*.bz2压缩文件：bzip2 test.txt
+解压*.bz2文件：bzip2 -d test.txt.bz2
+10、unzip
+解压*.zip文件：unzip test.zip
+查看*.zip文件的内容：unzip -l jasper.zip
+11、shutdown
+关闭系统并立即关机：shutdown -h now
+10分钟后关机：shutdown -h +10
+重启：shutdown -r now
+重启期间强制进行系统检查：shutdown -Fr now
+11、ps（显示正在运行中的进程的信息）
+查看当前正在运行的进程：ps -ef|grep text.jar
+12、top（显示当前系统中占用资源最多的一些进程）
+13、df（显示文件系统的磁盘使用情况）
+以更符合阅读习惯的方式显示磁盘使用量：df -h
+14、kill（终止一个进程）
+终止进程：kill -9 进程号
+15、rm（删除文件）
+删除当前目录下的所有文件：rm -rf filename.txt
+16、cp（拷贝）
+拷贝文件1到文件2：cp file1 file2
+17、mv（重命名）
+mv file1 file2
+18、cat（查看多个文件的内容）
+cat file1 file2
+19、chmod（改变文件和目录的权限）
+20、mkdir（创建目录）
+在home目录下创建一个名为temp的目录：mkdir ~/temp
+21、ifconfig
+查看所有网络接口及其状态：ifconfig -a
+22、tail
+实时查看文件：tail -f log-file
+终止执行：CTRL+C
+23、less
+不加载整个文件的前提下显示文件内容：less huge-log-file.log
+向前和向后滚屏：CTRL+F/B
+24、su（切换用户账号）
+超级用户使用这个命令可以切换到任何其他用户而不用输入密码：su - USERNAME
+25、ping
+ping一个远程主机，只发5个数据包：ping -c 5 gmail.com
+26、
