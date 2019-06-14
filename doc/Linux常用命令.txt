@@ -46,12 +46,16 @@ cat file1 file2
 在home目录下创建一个名为temp的目录：mkdir ~/temp
 21、ifconfig
 查看所有网络接口及其状态：ifconfig -a
+
 22、tail
-实时查看文件：tail -f log-file
+实时查看文件：tail -f filename
+显示filename最后20行：tail -n 20 filename
 终止执行：CTRL+C
+
 23、less
-不加载整个文件的前提下显示文件内容：less huge-log-file.log
+显示文件内容（不加载整个文件）：less huge-log-file.log
 向前和向后滚屏：CTRL+F/B
+
 24、su（切换用户账号）
 超级用户使用这个命令可以切换到任何其他用户而不用输入密码：su - USERNAME
 25、ping
