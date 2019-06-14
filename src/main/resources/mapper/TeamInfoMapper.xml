@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kanghe.notes.mapper.TeamInfoMapper">
+    <resultMap id="BaseResultMap" type="com.kanghe.notes.entity.TeamInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="profile" jdbcType="VARCHAR" property="profile"/>
+        <result column="good" jdbcType="VARCHAR" property="good"/>
+        <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl"/>
+        <result column="dr_num" jdbcType="INTEGER" property="drNum"/>
+        <result column="rec_goods_num" jdbcType="INTEGER" property="recGoodsNum"/>
+        <result column="status" jdbcType="BIT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, code, `name`, profile, good, picture_url, dr_num, rec_goods_num, `status`, create_time, 
+    update_time, del_flag, remarks
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_team_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_team_info
+        where del_flag = 0
+        and `name` = #{name}
+    </select>
+    <select id="selectCount" parameterType="com.kanghe.notes.dto.QueryTeamPageDTO" resultType="java.lang.Integer">
+        select
+        count(1)
+        from tb_team_info a
+        where a.del_flag = 0
+        <if test="code != null and code != ''">
+            and a.code = #{code}
+        </if>
+        <if test="name != null and name != ''">
+            and a.name like concat('%', #{name}, '%')
+        </if>
+        <if test="status != null">
+            and a.status = #{status}
+        </if>
+    </select>
+    <select id="selectList" parameterType="com.kanghe.notes.dto.QueryTeamPageDTO"
+            resultType="com.kanghe.notes.vo.TeamInfoVO">
+        select
+        a.code,
+        a.name,
+        a.dr_num drNum,
+        a.rec_goods_num recGoodsNum,
+        a.status
+        from tb_team_info a
+        where a.del_flag = 0
+        <if test="code != null and code != ''">
+            and a.code = #{code}
+        </if>
+        <if test="name != null and name != ''">
+            and a.name like concat('%', #{name}, '%')
+        </if>
+        <if test="status != null">
+            and a.status = #{status}
+        </if>
+        limit ${(pageNo-1)*pageSize}, ${pageSize}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_team_info
+    where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.kanghe.notes.entity.TeamInfo"
+            useGeneratedKeys="true">
+    insert into tb_team_info (code, `name`, profile, 
+      good, picture_url, dr_num, 
+      rec_goods_num, `status`, create_time, 
+      update_time, del_flag, remarks
+      )
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, 
+      #{good,jdbcType=VARCHAR}, #{pictureUrl,jdbcType=VARCHAR}, #{drNum,jdbcType=INTEGER}, 
+      #{recGoodsNum,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=BIT}, #{remarks,jdbcType=VARCHAR}
+      )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.kanghe.notes.entity.TeamInfo"
+            useGeneratedKeys="true">
+        insert into tb_team_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="profile != null">
+                profile,
+            </if>
+            <if test="good != null">
+                good,
+            </if>
+            <if test="pictureUrl != null">
+                picture_url,
+            </if>
+            <if test="drNum != null">
+                dr_num,
+            </if>
+            <if test="recGoodsNum != null">
+                rec_goods_num,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="profile != null">
+                #{profile,jdbcType=VARCHAR},
+            </if>
+            <if test="good != null">
+                #{good,jdbcType=VARCHAR},
+            </if>
+            <if test="pictureUrl != null">
+                #{pictureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="drNum != null">
+                #{drNum,jdbcType=INTEGER},
+            </if>
+            <if test="recGoodsNum != null">
+                #{recGoodsNum,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kanghe.notes.entity.TeamInfo">
+        update tb_team_info
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="profile != null">
+                profile = #{profile,jdbcType=VARCHAR},
+            </if>
+            <if test="good != null">
+                good = #{good,jdbcType=VARCHAR},
+            </if>
+            <if test="pictureUrl != null">
+                picture_url = #{pictureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="drNum != null">
+                dr_num = #{drNum,jdbcType=INTEGER},
+            </if>
+            <if test="recGoodsNum != null">
+                rec_goods_num = #{recGoodsNum,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kanghe.notes.entity.TeamInfo">
+    update tb_team_info
+    set code = #{code,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      profile = #{profile,jdbcType=VARCHAR},
+      good = #{good,jdbcType=VARCHAR},
+      picture_url = #{pictureUrl,jdbcType=VARCHAR},
+      dr_num = #{drNum,jdbcType=INTEGER},
+      rec_goods_num = #{recGoodsNum,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=BIT},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

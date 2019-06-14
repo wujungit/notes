@@ -1,8 +1,11 @@
+
 1、tar（将多个文件合并为一个文件）
 创建tar文件：tar cvf archive_name.tar dirname/
 解压tar文件：tar xvf archive_name.tar
 查看tar文件：tar tvf archive_name.tar
+
 2、grep（在文件中查找字符串-不区分大小写）
+
 3、find（查找指定文件名的文件-不区分大小写）
 4、ssh（登录到远程主机）
 5、ls ls-lh ll
