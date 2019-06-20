@@ -1,6 +1,5 @@
 package com.kanghe.notes.exception;
 
-import com.alibaba.fastjson.JSONObject;
 import com.kanghe.notes.common.BaseResult;
 import com.kanghe.notes.enums.ResultEnum;
 import lombok.extern.slf4j.Slf4j;

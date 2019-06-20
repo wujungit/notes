@@ -1,6 +1,5 @@
 package com.kanghe.notes.service.impl;
 
-import com.kanghe.notes.common.BaseResult;
 import com.kanghe.notes.common.PageResult;
 import com.kanghe.notes.dto.AddTeamDTO;
 import com.kanghe.notes.dto.QueryTeamPageDTO;

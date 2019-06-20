@@ -28,15 +28,15 @@ public class TeamController {
     @Autowired
     private ITeamService teamService;
 
-    @ApiOperation(value = "分页查询团队列表", notes = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "分页查询团队列表", notes = "", tags = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @PostMapping(value = "/queryPage", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public BaseResult<?> queryPage(@ApiParam @RequestBody QueryTeamPageDTO dto) {
         log.info("TeamController queryPage req: {}", JSON.toJSONString(dto));
-        PageResult result = teamService.queryPage(dto);
+        PageResult<?> result = teamService.queryPage(dto);
         return new BaseResult<>().success(result, "分页查询团队列表成功");
     }
 
-    @ApiOperation(value = "新增团队", notes = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "新增团队", notes = "", tags = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public BaseResult<?> add(@ApiParam @RequestBody @Valid AddTeamDTO dto) {
         log.info("TeamController add req: {}", JSON.toJSONString(dto));
