@@ -1,0 +1,22 @@
+一、Maven
+1、私服Nexus
+私服是一个特殊的远程仓库，它是架设在局域网内的仓库服务；
+Maven构建时，先从私服请求，如果私服上没有，则从外部的远程仓库下载，缓存在私服上；
+好处：节省自己的外网带宽，加速Maven的构建，部署第三方构件，提高稳定性，增强控制，权限管理，降低中央仓库的负荷；
+2、常用命令
+mvn compile（编译类文件）
+mvn package（打包）
+mvn install（包含mvn compile，mvn package，然后上传到本地仓库）
+mvn deploy（包含mvn install，然后，上传到私服）
+mvn clean（清除target目录）
+mvn -Dtest package（只打包不测试）
+mvn clean install-U（强制检查更新）
+mvn clean install-e（打印完整的堆栈，方便分析错误）
+创建Maven项目
+mvn archetype:generate
+mvn archetype:generate -DgroupId=com.kanghe -DartifactId=test -Dversion=1.0
+3、pom.xml
+dependencyManagement
+modules
+dependencies
+build
