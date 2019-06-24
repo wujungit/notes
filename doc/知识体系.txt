@@ -16,7 +16,33 @@ mvn clean install-e（打印完整的堆栈，方便分析错误）
 mvn archetype:generate
 mvn archetype:generate -DgroupId=com.kanghe -DartifactId=test -Dversion=1.0
 3、pom.xml
-dependencyManagement
-modules
-dependencies
+groupId、artifactId、version（依赖的坐标）
+dependencyManagement（声明依赖，并不实现引入，管理依赖jar版本号）
+dependencies（项目依赖）
+modules（聚合工程的模块定义）
 build
+    plugins（构建过程中用到的插件）
+    plugin
+        maven-compiler-plugin（编译Java源码）
+        maven-dependency-plugin（复制依赖的jar包到指定的文件夹里）
+二、Dubbo
+
+三、Zookeeper
+
+三、NoSQL
+四、MQ
+五、Session跨域共享
+六、自动化部署
+七、Web服务器
+八、持久层高并发
+九、分布式接口
+十、Spring Cloud
+十一、搜素引擎
+十二、容器技术
+1、Docker
+
+十三、JVM优化
+十四、Java程序性能优化
+十五、数据库优化
+十六、服务器优化
+十七、Linux服务器优化
