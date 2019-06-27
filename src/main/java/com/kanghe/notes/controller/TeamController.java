@@ -6,7 +6,6 @@ import com.kanghe.notes.common.PageResult;
 import com.kanghe.notes.dto.AddTeamDTO;
 import com.kanghe.notes.dto.QueryTeamPageDTO;
 import com.kanghe.notes.service.ITeamService;
-import com.kanghe.notes.util.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -28,16 +27,11 @@ public class TeamController {
 
     @Autowired
     private ITeamService teamService;
-    @Autowired
-    private RedisUtil redisUtil;
-
-    private static final String KEY = "KEY";
 
     @ApiOperation(value = "分页查询团队列表", notes = "", tags = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @PostMapping(value = "/queryPage", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public BaseResult<?> queryPage(@ApiParam @RequestBody QueryTeamPageDTO dto) {
         log.info("TeamController queryPage req: {}", JSON.toJSONString(dto));
-        redisUtil.set(KEY, dto.getCode());
         PageResult<?> result = teamService.queryPage(dto);
         return new BaseResult<>().success(result, "分页查询团队列表成功");
     }
