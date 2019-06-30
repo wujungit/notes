@@ -16,6 +16,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
 import java.time.Duration;
 
 /**
@@ -29,49 +30,44 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-
-        RedisSerializer<String> redisSerializer = new StringRedisSerializer();
-
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-
         template.setConnectionFactory(factory);
-        //key序列化方式
-        template.setKeySerializer(redisSerializer);
-        //value序列化
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        //value hashmap序列化
-        template.setHashValueSerializer(jackson2JsonRedisSerializer);
-
+        // 设置序列化器
+        // key序列化
+        template.setKeySerializer(getStringRedisSerializer());
+        // value序列化
+        template.setValueSerializer(getJackson2JsonRedisSerializer());
+        // hash的filed序列化
+        template.setHashKeySerializer(getStringRedisSerializer());
+        // hash的value序列化
+        template.setHashValueSerializer(getJackson2JsonRedisSerializer());
         return template;
     }
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory factory) {
-        RedisSerializer<String> redisSerializer = new StringRedisSerializer();
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-
-        //解决查询缓存转换异常的问题
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-
         // 配置序列化（解决乱码的问题）,过期时间30秒
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofSeconds(30))
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(getStringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(getJackson2JsonRedisSerializer()))
                 .disableCachingNullValues();
-
-        RedisCacheManager cacheManager = RedisCacheManager.builder(factory)
-                .cacheDefaults(config)
-                .build();
-        return cacheManager;
+        return RedisCacheManager.builder(factory).cacheDefaults(config).build();
     }
+
+    private RedisSerializer<String> getStringRedisSerializer() {
+        return new StringRedisSerializer();
+    }
+
+    private Jackson2JsonRedisSerializer<?> getJackson2JsonRedisSerializer() {
+        Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer<>(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        // 指定要序列化的域
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        // 指定序列化输入的类型
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        serializer.setObjectMapper(om);
+        return serializer;
+    }
+
 }
