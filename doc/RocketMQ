@@ -1,0 +1,12 @@
+Kafka
+ActiveMQ
+RabbitMQ
+RocketMQ
+高可用
+
+解耦，异步，削峰
+发布订阅
+
+系统可用性降低
+系统复杂度提高
+一致性问题
