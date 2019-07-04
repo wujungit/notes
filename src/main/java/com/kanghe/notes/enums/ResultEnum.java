@@ -12,6 +12,7 @@ public enum ResultEnum {
     DATA_NOT_FOUND(1002, "数据不存在"),
     DATA_HAS_EXISTS(1003, "数据已存在"),
     OPERATION_ERROR(1004, "操作有误"),
+    SEND_MQ_ERROR(1005, "发送MQ失败"),
     ;
 
     private Integer code;
