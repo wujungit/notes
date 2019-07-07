@@ -16,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class SendMQServiceImpl implements ISendMQService {
 
-    @Autowired
     private DefaultMQProducer defaultMQProducer;
 
     @Override

@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,6 +30,31 @@ public class TestRedis {
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private JedisPool jedisPool;
+
+    @Test
+    public void test0() {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            Long incr = jedis.incr("ORD");
+            String code = "ORD" + String.format("%016d", incr);
+            System.out.println(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+    }
+
+    public synchronized void returnResource(Jedis jedis) {
+        if (jedis != null) {
+            jedis.close();
+        }
+    }
 
     @Test
     public void test1() {
