@@ -9,8 +9,8 @@ public class Father {
         this.son = son;
     }
 
-    public void findLove() {
-        this.son.findLove();
+    public void moveBrick() {
+        this.son.moveBrick();
     }
 
 }
