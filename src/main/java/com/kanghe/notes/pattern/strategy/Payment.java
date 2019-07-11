@@ -1,4 +1,4 @@
-package com.kanghe.notes.pattern.strategy.pay;
+package com.kanghe.notes.pattern.strategy;
 
 /**
  * 支付渠道

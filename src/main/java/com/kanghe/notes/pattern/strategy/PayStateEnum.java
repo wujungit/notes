@@ -1,29 +1,21 @@
-package com.kanghe.notes.pattern.strategy.pay;
+package com.kanghe.notes.pattern.strategy;
 
 import lombok.Getter;
 
 @Getter
-public enum PayTypeEnum {
+public enum PayStateEnum {
 
-    ALI_PAY(1, "支付宝支付"),
-    WEI_XIN_PAY(2, "微信支付"),
+    SUCCESS(200, "成功"),
+    ERROR(500, "失败"),
+    PROCESSING(-1, "处理中"),
     ;
 
     private int code;
     private String msg;
-    private Payment payment;
 
-    PayTypeEnum(int code, String msg) {
+    PayStateEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
-    }
-
-    PayTypeEnum(Payment payment) {
-        this.payment = payment;
-    }
-
-    public Payment get() {
-        return this.payment;
     }
 
     /**
@@ -34,7 +26,7 @@ public enum PayTypeEnum {
      */
     public static boolean isValid(Integer code) {
         if (null != code) {
-            for (PayTypeEnum re : values()) {
+            for (PayStateEnum re : values()) {
                 if (re.code == code) {
                     return true;
                 }

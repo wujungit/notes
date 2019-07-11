@@ -1,4 +1,4 @@
-package com.kanghe.notes.pattern.strategy.pay;
+package com.kanghe.notes.pattern.strategy;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,9 @@ public class Order {
         this.amount = amount;
     }
 
+    // 完美的解决了需要再代码中写switch的过程
     public BaseResult<?> pay(PayTypeEnum payTypeEnum) {
+        Payment payment = payTypeEnum.get();
         return payment.pay(this.uid, this.amount);
     }
 
