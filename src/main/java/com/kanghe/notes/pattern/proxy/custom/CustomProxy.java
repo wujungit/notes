@@ -15,6 +15,8 @@ import java.lang.reflect.Method;
  **/
 public class CustomProxy {
 
+    private static final String LN = "\r\n";
+
     public static Object newProxyInstance(CustomClassLoader classLoader, Class<?>[] interfaces, CustomInvocationHandler h) {
         try {
             // 1、动态生成源代码.java文件
@@ -48,24 +50,24 @@ public class CustomProxy {
 
     private static String generateSrc(Class<?>[] interfaces) {
         StringBuffer sb = new StringBuffer();
-        sb.append("package com.kanghe.notes.pattern.proxy.custom;" + "\r\n");
-        sb.append("import java.lang.reflect.Method;" + "\r\n");
-        sb.append("public class $Proxy0 implements " + interfaces[0].getName() + "{" + "\r\n");
-        sb.append("CustomInvocationHandler h;" + "\r\n");
-        sb.append("public $Proxy0(CustomInvocationHandler h) {" + "\r\n");
-        sb.append("this.h = h;" + "\r\n");
-        sb.append("}" + "\r\n");
+        sb.append("package com.kanghe.notes.pattern.proxy.custom;" + LN);
+        sb.append("import java.lang.reflect.Method;" + LN);
+        sb.append("public class $Proxy0 implements " + interfaces[0].getName() + "{" + LN);
+        sb.append("private CustomInvocationHandler h;" + LN);
+        sb.append("public $Proxy0(CustomInvocationHandler h) {" + LN);
+        sb.append("this.h = h;" + LN);
+        sb.append("}" + LN);
         for (Method m : interfaces[0].getMethods()) {
-            sb.append("public " + m.getReturnType().getName() + " " + m.getName() + "() {" + "\r\n");
-            sb.append("try {" + "\r\n");
-            sb.append("Method m = " + interfaces[0].getName() + ".class.getMethod(\"" + m.getName() + "\" ,new Class[]{});" + "\r\n");
-            sb.append("this.h.invoke(this, m, null);" + "\r\n");
-            sb.append("} catch (Exception e) {" + "\r\n");
-            sb.append("e.printStackTrace();" + "\r\n");
-            sb.append("}" + "\r\n");
-            sb.append("}" + "\r\n");
+            sb.append("public " + m.getReturnType().getName() + " " + m.getName() + "() {" + LN);
+            sb.append("try {" + LN);
+            sb.append("Method m = " + interfaces[0].getName() + ".class.getMethod(\"" + m.getName() + "\" ,new Class[]{});" + LN);
+            sb.append("this.h.invoke(this, m, null);" + LN);
+            sb.append("} catch (Exception e) {" + LN);
+            sb.append("e.printStackTrace();" + LN);
+            sb.append("}" + LN);
+            sb.append("}" + LN);
         }
-        sb.append("}" + "\r\n");
+        sb.append("}" + LN);
         return sb.toString();
     }
 

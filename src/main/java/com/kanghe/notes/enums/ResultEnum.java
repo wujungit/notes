@@ -23,4 +23,21 @@ public enum ResultEnum {
         this.msg = msg;
     }
 
+    /**
+     * 校验枚举值是否是已定义的
+     *
+     * @param code
+     * @return
+     */
+    public static boolean isValid(Integer code) {
+        if (null != code) {
+            for (ResultEnum re : values()) {
+                if (re.code.equals(code)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
