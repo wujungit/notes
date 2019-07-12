@@ -1,6 +1,7 @@
 package com.kanghe.notes.pattern.strategy;
 
 import com.alibaba.fastjson.JSON;
+import com.kanghe.notes.pattern.adapter.BaseResult;
 
 public class PayStrategyTest {
 

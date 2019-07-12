@@ -1,4 +1,4 @@
-package com.kanghe.notes.pattern.strategy;
+package com.kanghe.notes.pattern.adapter;
 
 import java.io.Serializable;
 

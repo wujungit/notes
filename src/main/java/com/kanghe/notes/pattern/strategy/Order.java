@@ -1,5 +1,6 @@
 package com.kanghe.notes.pattern.strategy;
 
+import com.kanghe.notes.pattern.adapter.BaseResult;
 import lombok.Getter;
 import lombok.Setter;
 

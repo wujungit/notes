@@ -1,5 +1,7 @@
 package com.kanghe.notes.pattern.strategy;
 
+import com.kanghe.notes.pattern.adapter.BaseResult;
+
 /**
  * 支付渠道
  */
