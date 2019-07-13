@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -32,4 +33,14 @@ public class TeamInfoVO implements Serializable {
      * 状态（0-启用，1-禁用）
      */
     private Integer status;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 备注
+     */
+    private String remarks;
 }

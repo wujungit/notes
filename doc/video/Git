@@ -1,0 +1,11 @@
+git status
+git add
+git commit
+git clone
+
+HEAD、master、branch
+HEAD：当前commit的引用
+master：默认branch
+branch：对commit的引用
+
+git init

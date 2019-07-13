@@ -55,7 +55,9 @@
         a.name,
         a.dr_num drNum,
         a.rec_goods_num recGoodsNum,
-        a.status
+        a.status,
+        a.create_time,
+        a.remarks
         from tb_team_info a
         where a.del_flag = 0
         <if test="code != null and code != ''">
