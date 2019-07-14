@@ -1,0 +1,36 @@
+网络领域的知识
+1、协议：tcp、udp、multicast
+2、IO（BIO、NIO、AIO）
+3、Socket
+4、NIO（Netty、Mina）
+5、序列化和反序列化
+
+OSI 七层网络模型
+TCP/IP 四层概念模型
+
+应用层 HTTP
+传输层 TCP头-HTTP请求报文
+网络层 TP头-TCP头-HTTP请求报文
+数据链路层 MAC头-TP头-TCP头-HTTP请求报文
+物理层 0101001001010
+
+TP头：源IP地址，目的IP地址
+TCP头：目标端口号（对应进程的端口号）
+
+TCP/IP
+1、DNS解析
+2、网关进行数据传输
+3、路由协议
+4、握手协议
+
+HTTPS
+SSL/TLS
+HTTPS的通信原理：
+非对称加密（公钥、私钥）
+服务端-私钥，客户端-公钥
+
+数字证书：加密（Server端的公钥）
+第三方机构生成数字证书，对我们服务端的公钥进行加密
+
+服务端向CA机构申请证书，生成公私钥（s.pub/s.pri）,服务端会保存自己的私钥，把公钥告诉CA机构；
+CA机构有自己的公私钥（c.pub/c.pri）,使用c.pri加密服务端的s.pub生成数字证书

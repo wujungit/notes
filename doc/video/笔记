@@ -1,0 +1,9 @@
+RPC（远程过程调用）
+
+java开发的RMI
+基于soap协议（http+xml）的webservice/axis/cxf
+thrift/grpc/dubbo
+
+解决跨进程通讯的问题
+
+RMI（远程方法调用）

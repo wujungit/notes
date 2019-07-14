@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 @Getter
 @Setter
@@ -43,4 +43,10 @@ public class TeamInfoVO implements Serializable {
      * 备注
      */
     private String remarks;
+
+    private Boolean on_off;
+
+    private List<String> list;
+
+    private Map<String, Object> map;
 }
